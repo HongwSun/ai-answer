@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: ai-code-helper
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+langchain4j:
+  community:
+    dashscope:
+      chat-model:
+        model-name: qwen-max
+        api-key:
+      streaming-chat-model:
+        model-name: qwen-max
+        api-key:
+#      embedding-model:
+#        model-name: text-embedding-v3
+#        api-key:
+#bigmodel:
+#  api-key:
+# AI 安全防护配置
+ai:
+  guardrail:
+    enabled: false  # 是否启用敏感词检测
+    case-sensitive: false  # 是否区分大小写

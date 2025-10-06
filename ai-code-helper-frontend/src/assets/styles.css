@@ -1,0 +1,271 @@
+/* 现代化主题样式 */
+:root {
+  /* 深色主题颜色方案 - 模仿聊天界面样式 */
+  --primary-color: #0ea5e9;
+  --primary-light: #38bdf8;
+  --primary-dark: #0284c7;
+  --secondary-color: #10b981;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-light: #64748b;
+  --background-primary: #0f172a;
+  --background-secondary: #1e293b;
+  --background-tertiary: #334155;
+  --border-color: #475569;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-2xl: 1rem;
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.25s ease-in-out;
+  --transition-slow: 0.35s ease-in-out;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox滚动条隐藏 */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* 全局样式重置和基础样式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-primary);
+  background-color: var(--background-secondary);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-tertiary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-light);
+  border-radius: 3px;
+  transition: background-color var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* 动画和过渡效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 通用工具类 */
+.fade-in {
+  animation: fadeIn var(--transition-normal);
+}
+
+.slide-in-right {
+  animation: slideInFromRight var(--transition-normal);
+}
+
+.slide-in-left {
+  animation: slideInFromLeft var(--transition-normal);
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Markdown 样式增强 */
+.markdown-enhanced {
+  line-height: 1.6;
+}
+
+.markdown-enhanced h1,
+.markdown-enhanced h2,
+.markdown-enhanced h3,
+.markdown-enhanced h4,
+.markdown-enhanced h5,
+.markdown-enhanced h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-enhanced h1 { font-size: 1.875rem; }
+.markdown-enhanced h2 { font-size: 1.5rem; }
+.markdown-enhanced h3 { font-size: 1.25rem; }
+.markdown-enhanced h4 { font-size: 1.125rem; }
+.markdown-enhanced h5 { font-size: 1rem; }
+.markdown-enhanced h6 { font-size: 0.875rem; }
+
+.markdown-enhanced p {
+  margin-bottom: 1em;
+}
+
+.markdown-enhanced ul,
+.markdown-enhanced ol {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.markdown-enhanced li {
+  margin-bottom: 0.25em;
+}
+
+.markdown-enhanced code {
+  background-color: var(--background-tertiary);
+  padding: 0.125em 0.25em;
+  border-radius: var(--border-radius-sm);
+  font-family: 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.875em;
+}
+
+.markdown-enhanced pre {
+  background-color: var(--background-tertiary);
+  padding: 1em;
+  border-radius: var(--border-radius-md);
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+.markdown-enhanced pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdown-enhanced blockquote {
+  border-left: 4px solid var(--primary-light);
+  padding-left: 1em;
+  margin-bottom: 1em;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.markdown-enhanced a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.markdown-enhanced a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.markdown-enhanced table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.markdown-enhanced th,
+.markdown-enhanced td {
+  border: 1px solid var(--border-color);
+  padding: 0.5em;
+  text-align: left;
+}
+
+.markdown-enhanced th {
+  background-color: var(--background-tertiary);
+  font-weight: 600;
+}
+
+.markdown-enhanced hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2em 0;
+}
+
+/* 响应式断点 */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+}
