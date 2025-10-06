@@ -1,6 +1,6 @@
-package com.hv.aicodehelper.ai;
+package com.hv.aianswer.ai;
 
-import com.hv.aicodehelper.ai.guardrail.SafeInputGuardrail;
+import com.hv.aianswer.ai.guardrail.SafeInputGuardrail;
 import dev.langchain4j.service.*;
 import dev.langchain4j.service.guardrail.InputGuardrails;
 import reactor.core.publisher.Flux;

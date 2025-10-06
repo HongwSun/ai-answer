@@ -1,4 +1,4 @@
-package com.hv.aicodehelper.ai.model;
+package com.hv.aianswer.ai.model;
 
 import dev.langchain4j.community.model.dashscope.QwenChatModel;
 import dev.langchain4j.model.chat.ChatModel;

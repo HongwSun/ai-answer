@@ -1,6 +1,6 @@
-package com.hv.aicodehelper.controller;
+package com.hv.aianswer.controller;
 
-import com.hv.aicodehelper.ai.AiCodeHelperService;
+import com.hv.aianswer.ai.AiCodeHelperService;
 import jakarta.annotation.Resource;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;

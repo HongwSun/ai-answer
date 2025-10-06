@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // 配置axios基础URL
-const API_BASE_URL = 'http://47.117.71.200:8081/api'
-// const API_BASE_URL = 'http://127.0.0.1:8081/api'
+// const API_BASE_URL = 'http://47.117.71.200:8081/api'
+const API_BASE_URL = 'http://127.0.0.1:8081/api'
 /**
  * 使用 SSE 方式调用聊天接口
  * @param {number} memoryId 聊天室ID

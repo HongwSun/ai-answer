@@ -1,4 +1,4 @@
-package com.hv.aicodehelper.ai.guardrail;
+package com.hv.aianswer.ai.guardrail;
 
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.guardrail.InputGuardrail;

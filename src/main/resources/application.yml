@@ -10,7 +10,7 @@ langchain4j:
     dashscope:
       chat-model:
         model-name: qwen-max
-        api-key:
+        api-key: 
       streaming-chat-model:
         model-name: qwen-max
         api-key:

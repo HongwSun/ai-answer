@@ -1,4 +1,4 @@
-package com.hv.aicodehelper.config;
+package com.hv.aianswer.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

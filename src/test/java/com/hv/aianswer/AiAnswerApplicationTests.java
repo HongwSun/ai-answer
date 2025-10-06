@@ -1,10 +1,10 @@
-package com.hv.aicodehelper;
+package com.hv.aianswer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AiCodeHelperApplicationTests {
+class AiAnswerApplicationTests {
 
     @Test
     void contextLoads() {
