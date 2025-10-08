@@ -14,11 +14,11 @@
 
         <!-- 历史消息 -->
         <ChatMessage
-          v-for="message in messages"
-          :key="message.id"
-          :message="message.content"
-          :is-user="message.isUser"
-          :timestamp="message.timestamp"
+            v-for="message in messages"
+            :key="message.id"
+            :message="message.content"
+            :is-user="message.isUser"
+            :timestamp="message.timestamp"
         />
 
         <!-- AI 正在回复的消息 -->
@@ -37,12 +37,25 @@
         </div>
       </div>
 
-      <!-- 输入框 -->
-      <ChatInput
-        :disabled="isAiTyping"
-        @send-message="sendMessage"
-        placeholder="请输入您的问题..."
-      />
+      <!-- 输入区域容器 -->
+      <div class="input-area-container">
+        <!-- 回到底部按钮 -->
+        <button
+            v-if="showScrollToBottomBtn"
+            class="scroll-to-bottom-btn"
+            @click="forceScrollToBottom"
+            title="回到底部"
+        >
+          ↓
+        </button>
+
+        <!-- 输入框 -->
+        <ChatInput
+            :disabled="isAiTyping"
+            @send-message="sendMessage"
+            placeholder="请输入您的问题..."
+        />
+      </div>
     </main>
 
     <!-- 连接状态提示 -->
@@ -78,7 +91,8 @@ export default {
       isStreaming: false,
       currentAiResponse: '',
       currentEventSource: null,
-      connectionError: false
+      connectionError: false,
+      showScrollToBottomBtn: false
     }
   },
   computed: {
@@ -130,11 +144,11 @@ export default {
 
       // 开始SSE连接
       this.currentEventSource = chatWithSSE(
-        this.memoryId,
-        userMessage,
-        this.handleAiMessage,
-        this.handleAiError,
-        this.handleAiClose
+          this.memoryId,
+          userMessage,
+          this.handleAiMessage,
+          this.handleAiError,
+          this.handleAiClose
       )
     },
 
@@ -184,9 +198,32 @@ export default {
       this.$nextTick(() => {
         const container = this.$refs.messagesContainer
         if (container) {
-          container.scrollTop = container.scrollHeight
+          // 只有当用户当前滚动位置接近底部时才自动滚动到底部
+          // 这里设置一个阈值（100px），如果用户向上滚动超过这个距离，就不再强制滚动
+          const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+          if (isNearBottom) {
+            container.scrollTop = container.scrollHeight
+          }
         }
       })
+    },
+
+    // 处理滚动事件，更新回到底部按钮的显示状态
+    handleScroll() {
+      const container = this.$refs.messagesContainer
+      if (container) {
+        // 当用户向上滚动超过一定距离（100px）时显示回到底部按钮
+        const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+        this.showScrollToBottomBtn = !isNearBottom && container.scrollHeight > container.clientHeight
+      }
+    },
+
+    // 强制滚动到底部
+    forceScrollToBottom() {
+      const container = this.$refs.messagesContainer
+      if (container) {
+        container.scrollTop = container.scrollHeight
+      }
     },
 
     initializeChat() {
@@ -197,10 +234,20 @@ export default {
 
   mounted() {
     this.initializeChat()
+    // 监听滚动事件来显示/隐藏回到底部按钮
+    const container = this.$refs.messagesContainer
+    if (container) {
+      container.addEventListener('scroll', this.handleScroll)
+    }
   },
 
   beforeUnmount() {
-    // 组件销毁前关闭连接
+    // 组件销毁前移除事件监听
+    const container = this.$refs.messagesContainer
+    if (container) {
+      container.removeEventListener('scroll', this.handleScroll)
+    }
+    // 关闭之前的连接
     if (this.currentEventSource) {
       this.currentEventSource.close()
     }
@@ -346,6 +393,53 @@ export default {
   }
 }
 
+/* 输入区域容器 */
+.input-area-container {
+  position: relative;
+}
+
+/* 回到底部按钮样式 */
+.scroll-to-bottom-btn {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .scroll-to-bottom-btn {
+    bottom: calc(100% + 8px);
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+.scroll-to-bottom-btn:hover {
+  background-color: var(--primary-dark);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.scroll-to-bottom-btn:active {
+  transform: scale(0.95);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .app-header {
@@ -387,6 +481,14 @@ export default {
     left: 10px;
     right: 10px;
     padding: 8px 12px;
+  }
+
+  .scroll-to-bottom-btn {
+    bottom: 70px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
   }
 }
 

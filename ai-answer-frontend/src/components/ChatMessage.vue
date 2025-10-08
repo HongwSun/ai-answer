@@ -249,7 +249,7 @@ export default {
 /* 新的复制按钮样式 */
 .copy-btn {
   position: absolute;
-  top: 8px;
+  bottom: 8px;
   right: 8px;
   display: inline-flex;
   align-items: center;
@@ -266,6 +266,15 @@ export default {
   padding: 0;
 }
 
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .copy-btn {
+    width: 26px;
+    height: 26px;
+    bottom: 6px;
+    right: 6px;
+  }
+}
 .ai-bubble:hover .copy-btn {
   opacity: 1;
 }
